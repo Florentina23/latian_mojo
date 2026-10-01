@@ -1,17 +1,83 @@
 package latian_mojo1;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
+import latian_mojo1.bank;
 
 public class Main {
+	static Scanner scan=new Scanner(System.in);
+	static ArrayList<bank> usernameList=new ArrayList<bank>();
+	
+	
+	
+	public static void create()
+	{
+		
+		System.out.println("Insert username: ");
+		String username=scan.nextLine();
+		System.out.println("Insert pin: ");
+		Integer pin=scan.nextInt();
+		bank bank=new bank(username, pin);
+		usernameList.add(bank);
+	}
+	
+	public static void login()
+	{
+		System.out.println("Insert username: ");
+		String username=scan.nextLine();
+		System.out.println("Insert pin: ");
+		Integer pin=scan.nextInt();
+		
+		for (int i = 0; i < usernameList.size(); i++) 
+		{
+			if(usernameList.contains(username))
+			{
+				System.out.printf("Hallooooo %s ", username);
+			}
+			else
+			{
+				System.out.println("Username not found, please create account");
+				create();
+			}
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		Scanner scan=new Scanner(System.in);
+		
+		int pilih=-1;
+		do {
+			System.out.println("1. Create account");
+			System.out.println("2. Login account");
+			System.out.println("Choose menu: ");
+			pilih=scan.nextInt();
+			scan.nextLine();
+			
+			switch(pilih)
+			{
+			case 1:
+				create();
+				break;
+				
+			case 2:
+				login();
+				break;	
+				
+			case 3:
+				for (int i = 0; i < usernameList.size(); i++) {
+					System.out.println(usernameList.get(i).username);
+					
+				}
+				
+			}
+		} while (pilih!=0);
 		
 		
-		ArrayList<String> bankSystem=new ArrayList<String>();
+		System.out.println("Halloo ");
+		
 		double saldo=0;
 		
 		int menu=-1;
@@ -51,6 +117,7 @@ public class Main {
 			 	break;
 			}
 		} while(menu!=4);
+		scan.close();
 	}
 
 }
