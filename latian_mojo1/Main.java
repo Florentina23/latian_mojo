@@ -9,8 +9,6 @@ public class Main {
 	static Scanner scan=new Scanner(System.in);
 	static ArrayList<bank> usernameList=new ArrayList<bank>();
 	
-	
-	
 	public static void create()
 	{
 		
@@ -31,9 +29,10 @@ public class Main {
 		
 		for (int i = 0; i < usernameList.size(); i++) 
 		{
-			if(usernameList.contains(username))
+			if(usernameList.get(i).username.equals(username) && usernameList.get(i).pin.equals(pin))
 			{
-				System.out.printf("Hallooooo %s ", username);
+				System.out.println("Hallooooo "+username);
+				
 			}
 			else
 			{
@@ -52,6 +51,7 @@ public class Main {
 		do {
 			System.out.println("1. Create account");
 			System.out.println("2. Login account");
+			System.out.println("3. Exit");
 			System.out.println("Choose menu: ");
 			pilih=scan.nextInt();
 			scan.nextLine();
@@ -65,21 +65,10 @@ public class Main {
 			case 2:
 				login();
 				break;	
-				
-			case 3:
-				for (int i = 0; i < usernameList.size(); i++) {
-					System.out.println(usernameList.get(i).username);
-					
-				}
-				
 			}
-		} while (pilih!=0);
-		
-		
-		System.out.println("Halloo ");
+		} while (pilih!=3);
 		
 		double saldo=0;
-		
 		int menu=-1;
 		do {
 			System.out.println("1. Lihat Saldo");
@@ -100,6 +89,7 @@ public class Main {
 				double topup=0;
 				System.out.println("Saldo yang ingin di topup Rp.");
 				topup=scan.nextDouble();
+				scan.nextLine();
 				saldo=saldo+topup;
 				System.out.println("Saldo anda Rp. "+saldo);
 				break;
