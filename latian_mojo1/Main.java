@@ -9,65 +9,8 @@ public class Main {
 	static Scanner scan=new Scanner(System.in);
 	static ArrayList<bank> usernameList=new ArrayList<bank>();
 	
-	public static void create()
+	public static void homePage()
 	{
-		
-		System.out.println("Insert username: ");
-		String username=scan.nextLine();
-		System.out.println("Insert pin: ");
-		Integer pin=scan.nextInt();
-		bank bank=new bank(username, pin);
-		usernameList.add(bank);
-	}
-	
-	public static void login()
-	{
-		System.out.println("Insert username: ");
-		String username=scan.nextLine();
-		System.out.println("Insert pin: ");
-		Integer pin=scan.nextInt();
-		
-		for (int i = 0; i < usernameList.size(); i++) 
-		{
-			if(usernameList.get(i).username.equals(username) && usernameList.get(i).pin.equals(pin))
-			{
-				System.out.println("Hallooooo "+username);
-				
-			}
-			else
-			{
-				System.out.println("Username not found, please create account");
-				create();
-			}
-		}
-		
-	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		
-		int pilih=-1;
-		do {
-			System.out.println("1. Create account");
-			System.out.println("2. Login account");
-			System.out.println("3. Exit");
-			System.out.println("Choose menu: ");
-			pilih=scan.nextInt();
-			scan.nextLine();
-			
-			switch(pilih)
-			{
-			case 1:
-				create();
-				break;
-				
-			case 2:
-				login();
-				break;	
-			}
-		} while (pilih!=3);
-		
 		double saldo=0;
 		int menu=-1;
 		do {
@@ -101,6 +44,16 @@ public class Main {
 				rek=scan.nextInt();
 				System.out.println("Saldo yang ingin di transfer Rp. ");
 				tf=scan.nextDouble();
+				if(tf>saldo)
+				{
+					System.out.println("Saldo tidak cukup");
+				}
+				else
+				{
+					System.out.println("Berhasil transfer!");
+					saldo=saldo-tf;
+				}
+				
 				break;
 				
 			default:
@@ -108,6 +61,65 @@ public class Main {
 			}
 		} while(menu!=4);
 		scan.close();
+	}
+	
+	public static void create()
+	{	
+		System.out.println("Insert username: ");
+		String username=scan.nextLine();
+		System.out.println("Insert pin: ");
+		Integer pin=scan.nextInt();
+		bank bank=new bank(username, pin);
+		usernameList.add(bank);
+	}
+	
+	public static void login()
+	{
+		System.out.println("Insert username: ");
+		String username=scan.nextLine();
+		System.out.println("Insert pin: ");
+		Integer pin=scan.nextInt();
+		
+		for (int i = 0; i < usernameList.size(); i++) 
+		{
+			if(usernameList.get(i).username.equals(username) && usernameList.get(i).pin.equals(pin))
+			{
+				System.out.println("Hallooooo "+username+"!");
+				homePage();
+			}
+			else
+			{
+				System.out.println("Username not found, please create account");
+				create();
+			}
+			break; 
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int pilih=-1;
+		do {
+			System.out.println("1. Create account");
+			System.out.println("2. Login account");
+			System.out.println("3. Exit");
+			System.out.println("Choose menu: ");
+			pilih=scan.nextInt();
+			scan.nextLine();
+			
+			switch(pilih)
+			{
+			case 1:
+				create();
+				break;
+				
+			case 2:
+				login();
+				break;	
+			}
+		} while (pilih!=3);
 	}
 
 }
