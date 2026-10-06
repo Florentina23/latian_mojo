@@ -38,29 +38,35 @@ public class Main {
 				break;
 				
 			case 3:
-				int rek;
+				String rek;
 				double tf;
 				System.out.println("Rekening yang ingin di transfer: ");
-				rek=scan.nextInt();
-				System.out.println("Saldo yang ingin di transfer Rp. ");
-				tf=scan.nextDouble();
-				if(tf>saldo)
+				rek=scan.nextLine();
+				for (int i = 0; i < usernameList.size(); i++) 
 				{
-					System.out.println("Saldo tidak cukup");
-				}
-				else
-				{
-					System.out.println("Berhasil transfer!");
-					saldo=saldo-tf;
+					if(usernameList.get(i).username.equals(rek))
+					{
+						System.out.println("Saldo yang ingin di transfer Rp. ");
+						tf=scan.nextDouble();
+						if(tf>saldo)
+						{
+							System.out.println("Saldo tidak cukup");
+						}
+						else
+						{
+							System.out.println("Berhasil transfer!");
+							saldo=saldo-tf;
+						}
+					}
+					else
+					{
+						System.out.println("Account not found!");
+					}
 				}
 				
 				break;
-				
-			default:
-			 	break;
 			}
 		} while(menu!=4);
-		scan.close();
 	}
 	
 	public static void create()
@@ -80,12 +86,19 @@ public class Main {
 		System.out.println("Insert pin: ");
 		Integer pin=scan.nextInt();
 		
+		if(usernameList.size()==0)
+		{
+			System.out.println("Username not found, please create account");
+			create();
+		}
+		
 		for (int i = 0; i < usernameList.size(); i++) 
 		{
 			if(usernameList.get(i).username.equals(username) && usernameList.get(i).pin.equals(pin))
 			{
 				System.out.println("Hallooooo "+username+"!");
 				homePage();
+				break;
 			}
 			else
 			{
@@ -94,7 +107,6 @@ public class Main {
 			}
 			break; 
 		}
-		
 	}
 
 	public static void main(String[] args) {
@@ -120,6 +132,7 @@ public class Main {
 				break;	
 			}
 		} while (pilih!=3);
+		scan.close();
 	}
 
 }
