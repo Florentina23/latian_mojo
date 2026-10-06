@@ -63,7 +63,6 @@ public class Main {
 						System.out.println("Account not found!");
 					}
 				}
-				
 				break;
 			}
 		} while(menu!=4);
@@ -85,28 +84,30 @@ public class Main {
 		String username=scan.nextLine();
 		System.out.println("Insert pin: ");
 		Integer pin=scan.nextInt();
+		boolean found=false;
 		
 		if(usernameList.size()==0)
 		{
 			System.out.println("Username not found, please create account");
-			create();
 		}
 		
 		for (int i = 0; i < usernameList.size(); i++) 
 		{
 			if(usernameList.get(i).username.equals(username) && usernameList.get(i).pin.equals(pin))
 			{
+				found=true;
 				System.out.println("Hallooooo "+username+"!");
+				
 				homePage();
 				break;
 			}
-			else
-			{
-				System.out.println("Username not found, please create account");
-				create();
-			}
-			break; 
-		}
+			
+		}	
+		if(found==false)
+				{
+					System.out.println("Username not found, please create account"); 
+				}
+		
 	}
 
 	public static void main(String[] args) {
@@ -134,5 +135,4 @@ public class Main {
 		} while (pilih!=3);
 		scan.close();
 	}
-
 }
